@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width" />
+    <script
+      src="https://cdn.tiny.cloud/1/fs8wzubgfxigcqxi2v3bv3rnpe3hncsuohmxqtw9uflmamt4/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      form,
+      #editor,
+      .editor-wrap,
+      .editor-wrap iframe {
+        /* height: 100%;
+        width: 100%; */
+      }
+      .mce-top-part {
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form method="post">
+      <textarea id="editor"></textarea>
+    </form>
+    <!-- <script>
+      tinymce.init({
+        selector: "textarea",
+      });
+    </script> -->
+    <script src="./dist/editor.js"></script>
+    <script>
+      window.init({
+        placeholder: "請輸入..",
+        content_style: "",
+      });
+    </script>
+  </body>
+</html>
