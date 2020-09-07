@@ -45,13 +45,17 @@ const CORE_CSS = `
 window.init = (config) => {
   tinymce.init({
     selector: "#editor",
-    // toolbar: "bold italic | link image | myCustomToolbarButton",
-    toolbar: "bold italic myCustomToolbarButton",
+    icons_url: "https://www.example.com/icons/material/icons.js",
+    icons: "material",
+    toolbar: [
+      "bold italic strikethrough myCustomToolbarButton bullist numlist",
+    ],
     toolbar_location: "bottom",
-    plugins: ["mentions", "autolink","link"],
+    plugins: ["mentions", "autolink", "advlist lists"],
     font_formats:
       "Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace; AkrutiKndPadmini=Akpdmi-n",
     // Remove all UI.
+    advlist_bullet_styles: "square",
     menubar: false,
     statusbar: false,
     mentions: {
@@ -109,5 +113,4 @@ window.init = (config) => {
     // link_default_protocol: "https",
     // default_link_target: "_blank",
   });
-  tinymce.activeEditor.execCommand("mceAnchor");
 };
