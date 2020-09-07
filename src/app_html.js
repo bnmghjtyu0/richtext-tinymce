@@ -48,7 +48,7 @@ window.init = (config) => {
     icons_url: "https://www.example.com/icons/material/icons.js",
     icons: "material",
     toolbar: [
-      "bold italic strikethrough myCustomToolbarButton bullist numlist",
+      "bold italic strikethrough underline myCustomToolbarButton bullist numlist",
     ],
     toolbar_location: "bottom",
     plugins: ["mentions", "autolink", "advlist lists"],
