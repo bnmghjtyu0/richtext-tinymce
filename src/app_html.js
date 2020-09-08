@@ -46,20 +46,73 @@ var btnContent = document.querySelector("#btnContent");
 
 function myScript() {
   const content = tinymce.activeEditor.getContent();
+  // tinymce.activeEditor.setContent("<p>Hello world!</p>");
+
+  tinymce.execCommand("mceInsertContent", false, "<p>Hello world!</p>");
+  tinymce.activeEditor.execCommand("mceEditImage");
+  tinymce.execCommand(
+    "mceInsertContent",
+    false,
+    '<img alt="Smiley face" height="42" width="42" src="https://images.unsplash.com/photo-1599495751117-4733b8869543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"/>'
+  );
   console.log(content);
 }
 btnContent.addEventListener("click", myScript);
 
+function myCustomExecCommandHandler(
+  editor_id,
+  elm,
+  command,
+  user_interface,
+  value
+) {
+  var linkElm, imageElm, inst;
+
+  switch (command) {
+    case "mceLink":
+      inst = tinyMCE.getInstanceById(editor_id);
+      linkElm = tinyMCE.getParentElement(inst.selection.getFocusElement(), "a");
+
+      if (linkElm)
+        alert(
+          "Link dialog has been overriden. Found link href: " +
+            tinyMCE.getAttrib(linkElm, "href")
+        );
+      else alert("Link dialog has been overriden.");
+
+      return true;
+
+    case "mceImage":
+      inst = tinyMCE.getInstanceById(editor_id);
+      imageElm = tinyMCE.getParentElement(
+        inst.selection.getFocusElement(),
+        "img"
+      );
+
+      if (imageElm)
+        alert(
+          "Image dialog has been overriden. Found image src: " +
+            tinyMCE.getAttrib(imageElm, "src")
+        );
+      else alert("Image dialog has been overriden.");
+
+      return true;
+  }
+
+  return false; // Pass to next handler in chain
+}
+
 window.init = (config) => {
   tinymce.init({
+    execcommand_callback: "myCustomExecCommandHandler",
     selector: "#editor",
     icons_url: "https://www.example.com/icons/material/icons.js",
     icons: "material",
     toolbar: [
-      "bold italic strikethrough underline myCustomToolbarButton bullist numlist",
+      "bold italic strikethrough underline myCustomToolbarButton bullist numlist media",
     ],
     toolbar_location: "bottom",
-    plugins: ["mentions", "autolink", "advlist lists"],
+    plugins: ["mentions", "autolink", "advlist lists", "imagetools", "media"],
     font_formats:
       "Arial=arial,helvetica,sans-serif; Courier New=courier new,courier,monospace; AkrutiKndPadmini=Akpdmi-n",
     // Remove all UI.
