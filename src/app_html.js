@@ -157,8 +157,20 @@ window.init = (config) => {
     //   });
     // },
 
-    // 加入自定義按鈕
     setup: function (editor) {
+      // 載入編輯器
+      editor.on("init", function (e) {
+        console.log("The Editor has initialized.");
+      });
+      // 監聽輸入
+      editor.on("change", function (e) {
+        console.log(tinymce.activeEditor.getContent());
+      });
+      editor.on("keyup", function (e) {
+        console.log(tinymce.activeEditor.getContent());
+      });
+
+      // 加入自定義按鈕
       editor.ui.registry.addButton("myCustomToolbarButton", {
         text: "My Custom Button",
         onAction: function () {
