@@ -11,8 +11,8 @@ let status = {
   strikethrough: false,
   paraType: "p",
   undo: {
-    hasUndo: false,
     hasRedo: false,
+    hasUndo: false,
   },
   link: {
     href: null,
@@ -41,6 +41,14 @@ const CORE_CSS = `
           content: attr( data-placeholder );
       }
   `;
+
+var btnContent = document.querySelector("#btnContent");
+
+function myScript() {
+  const content = tinymce.activeEditor.getContent();
+  console.log(content);
+}
+btnContent.addEventListener("click", myScript);
 
 window.init = (config) => {
   tinymce.init({
